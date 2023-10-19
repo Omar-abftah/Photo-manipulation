@@ -5,13 +5,13 @@
 //Last update : 7 October 2023
 
 
-// FCAI – OOP Programming – 2023 - Assignment 1 
+// FCAI – OOP Programming – 2023 - Assignment 1
 // Program Name:				CS213-2023-20220218-20220531-A1-Part1.cpp
 // Last Modification Date:	16/10/2023
 // Author1 and ID and Group:	Omar Ahmed Abdelfatah Gabr  - 20220218 - Group B
 // Author2 and ID and Group:	 Habiba Ali Zein El-Abideen Abd El-Fattah - 20220531 - Group B
 // Teaching Assistant:		-
-// Purpose: Editing photos with filters	
+// Purpose: Editing photos with filters
 
 #include <iostream>
 #include <fstream>
@@ -96,7 +96,7 @@ void BWfilter ()
 
     for (int i = 0; i < SIZE; i++) {
         for (int j = 0; j < SIZE; j++) {
-            //if the grey shade of the pixel is greater than the average, the pixel will be white 
+            //if the grey shade of the pixel is greater than the average, the pixel will be white
             if (image[i][j] > average)
                 image[i][j] = 255;
 
@@ -112,13 +112,13 @@ void rotate()
     cout<<"Rotate (90), (180) or (270) degrees? ";
     int angle;
     cin>>angle;
-    if(angle==90) 
+    if(angle==90)
     {
-        //if the angle is 90 degrees we change the row number to 256 - column number 
+        //if the angle is 90 degrees we change the row number to 256 - column number
         // and change the column number to the row number
-        for (int i = 0; i < SIZE; i++) 
+        for (int i = 0; i < SIZE; i++)
         {
-            for (int j = 0; j < SIZE; j++) 
+            for (int j = 0; j < SIZE; j++)
             {
                 image2[i][j]=image[SIZE-j][i];
             }
@@ -131,11 +131,11 @@ void rotate()
         writeGSBMP(imageFileName, image2);
     }
     else if (angle==180){
-        //if the angle is 180 degrees we change the row number to 256 - row number 
+        //if the angle is 180 degrees we change the row number to 256 - row number
         //and change the column number to the 256 - column number
-        for (int i = 0; i < SIZE; i++)  
+        for (int i = 0; i < SIZE; i++)
         {
-            for (int j = 0; j < SIZE; j++) 
+            for (int j = 0; j < SIZE; j++)
             {
                 image2[i][j]=image[SIZE-i][SIZE-j];
             }
@@ -148,20 +148,20 @@ void rotate()
         writeGSBMP(imageFileName, image2);
     }
     else if(angle==270){
-        //if the angle is 90 degrees we change the row number to 256 - column number 
+        //if the angle is 90 degrees we change the row number to 256 - column number
         // and change the column number to the row number
-        for (int i = 0; i < SIZE; i++) 
+        for (int i = 0; i < SIZE; i++)
         {
-            for (int j = 0; j < SIZE; j++) 
+            for (int j = 0; j < SIZE; j++)
             {
                 image2[i][j]=image[SIZE-j][i];
             }
         }
-       //if the angle is 180 degrees we change the row number to 256 - row number 
+       //if the angle is 180 degrees we change the row number to 256 - row number
         //and change the column number to the 256 - column number
         for(int i = 0 ; i < SIZE ; i++)
         {
-            for(int j = 0 ; j < SIZE ; j++) 
+            for(int j = 0 ; j < SIZE ; j++)
             {
                 image[i][j]=image2[SIZE-i][SIZE-j];
             }
@@ -180,9 +180,9 @@ void merge ()
 
     // we calculate the average of the pixels of the same place in both images
     // and store it in every pixel corresponding to it in image2 array
-    for (int i = 0; i < SIZE; i++) 
+    for (int i = 0; i < SIZE; i++)
     {
-        for (int j = 0; j < SIZE; j++) 
+        for (int j = 0; j < SIZE; j++)
         {
             image[i][j] = (image[i][j] + image2[i][j]) / 2;
         }
@@ -340,7 +340,7 @@ void detect()
                 {
                     image2[i][j] = 0;
                 }
-                else 
+                else
                 {
                     image2[i][j] = 255;
                 }
@@ -392,9 +392,11 @@ void blur()
 void shuffle () {
     cout << "New order of quarters ?\n";
     int quarter[4];
+    // the user enters the desired arrangement of quadrants of the new image
     for (int i = 0 ; i < 4 ; i++) {
         cin >> quarter[i];
     }
+    // we take the number of the first quadrant that the user entered and put it in the first quadrant of the new image
     for (int i = 0 ; i < 127 ; i++) {
         for (int j = 0 ; j < 127 ; j++) {
             if (quarter[0] == 1) {
@@ -411,6 +413,7 @@ void shuffle () {
             }
         }
     }
+    // we take the number of the second quadrant that the user entered and put it in the second quadrant of the new image
     for (int i = 0 ; i < 127 ; i++) {
         for (int j = 127 ; j < SIZE ; j++) {
             if (quarter[1] == 1) {
@@ -427,6 +430,7 @@ void shuffle () {
             }
         }
     }
+    // we take the number of the third quadrant that the user entered and put it in the third quadrant of the new image
     for (int i = 127 ; i < SIZE ; i++) {
         for (int j = 0 ; j < 127 ; j++) {
             if (quarter[2] == 1) {
@@ -443,6 +447,7 @@ void shuffle () {
             }
         }
     }
+    // we take the number of the fourth quadrant that the user entered and put it in the fourth quadrant of the new image
     for (int i = 127 ; i < SIZE ; i++) {
         for (int j = 127 ; j < SIZE ; j++) {
             if (quarter[3] == 1) {
@@ -459,23 +464,26 @@ void shuffle () {
             }
         }
     }
+    // we copy the image2 into image to save it
     for ( int i = 0 ; i < SIZE ; i++ ){
         for ( int j = 0 ; j < SIZE ; j++ ){
             image[i][j] = image2[i][j];
         }
     }
-    save();
 }
 void shrink ()
 {
+    // we take the dimension that the user wants to shrink the image
     cout << "Shrink to (1/2), (1/3) or (1/4)?\n";
     string dim;
     cin >> dim;
+    // we whiten the image2
     for ( int i = 0 ; i < SIZE ; i++ ){
         for ( int j = 0 ; j < SIZE ; j++ ){
             image2[i][j] = 255;
         }
     }
+    // here we shrink the image if the user entered (1/2)
     if (dim == "1/2") {
         int ptr = 0;
         for (int i = 0 ; i < 127 ; i ++){
@@ -488,6 +496,7 @@ void shrink ()
             ptr +=2;
         }
     }
+    // here we shrink the image if the user entered (1/3)
     if (dim == "1/3") {
         int ptr = 0;
         for (int i = 0 ; i < 85 ; i ++){
@@ -500,6 +509,7 @@ void shrink ()
             ptr +=3;
         }
     }
+    // here we shrink the image if the user entered (1/4)
     if (dim == "1/4") {
         int ptr = 0;
         for (int i = 0 ; i < 63 ; i ++){
@@ -512,6 +522,7 @@ void shrink ()
             ptr +=4;
         }
     }
+    // we copy the image2 into image to save it
     for ( int i = 0 ; i < SIZE ; i++ ){
         for ( int j = 0 ; j < SIZE ; j++ ){
             image[i][j] = image2[i][j];
@@ -520,9 +531,11 @@ void shrink ()
 }
 void enlarge ()
 {
+    // we take the part that the user wants to enlarge
     cout << "Which quarter to enlarge 1, 2, 3 or 4?\n";
     int part ;
     cin >> part;
+    // here we enlarge the first part of the image if the user entered (1)
     if (part == 1) {
         int ptr = 0;
         for (int i = 0 ; i < 127 ; i++) {
@@ -537,6 +550,7 @@ void enlarge ()
             ptr += 2;
         }
     }
+    // here we enlarge the second part of the image if the user entered (2)
     if (part == 2) {
         int ptr = 0;
         for (int i = 0 ; i < 127 ; i++) {
@@ -551,6 +565,7 @@ void enlarge ()
             ptr += 2;
         }
     }
+    // here we enlarge the third part of the image if the user entered (3)
     else if (part == 3) {
         int ptr = 0;
         for (int i = 127 ; i < SIZE ; i++) {
@@ -565,13 +580,14 @@ void enlarge ()
             ptr += 2;
         }
     }
-    else if (part == 4) 
+    // here we enlarge the fourth part of the image if the user entered (4)
+    else if (part == 4)
     {
         int ptr = 0;
         for (int i = 127 ; i < SIZE ; i++)
         {
             int ptr1 = 0;
-            for (int j = 127 ; j < SIZE ; j++) 
+            for (int j = 127 ; j < SIZE ; j++)
             {
                 image2[ptr][ptr1] = image[i][j];
                 image2[ptr][ptr1+1] = image[i][j];
@@ -582,6 +598,7 @@ void enlarge ()
             ptr += 2;
         }
     }
+    // we copy the image2 into image to save it
     for ( int i = 0 ; i < SIZE ; i++ )
     {
         for ( int j = 0 ; j < SIZE ; j++ )
@@ -592,6 +609,7 @@ void enlarge ()
 }
 void crop()
 {
+    // we take from the user the point from which he wants the image to start
     int x , y;
     int length , width;
     cout << "Please enter x y l w: ";
@@ -602,39 +620,41 @@ void crop()
             image2[i][j] = 255;
         }
     }
+    // we calculate the length and width of the point entered by user
     int l = SIZE - x;
     int m = SIZE - y;
+    // here we crop the image
     for ( int i = x ; i < l ; i++ ) {
         for (int j = y ; j < m ; j++) {
             image2[i][j] = image[i][j];
         }
     }
+    // we copy the image2 into image to save it
     for ( int i = 0 ; i < SIZE ; i++ ){
         for ( int j = 0 ; j < SIZE ; j++ ){
             image[i][j] = image2[i][j];
         }
     }
-    save();
 }
-void skew_horizontal()
-{
+void skew_horizontal() {
+    // first we take the angle of the horizontal skew and turning it to rad
+    // we concluded that the length is computed using the following formula
     double rad;
     cout<<"Please enter degree to skew right: ";
     cin>>rad;
     rad = 90 - rad;
     rad = (rad * 22) / (180 * 7);
-    double compression = tan(rad) * SIZE;
     double length = 256 / (1 + (1 / tan(rad)));
     double pixels = 256 / length;
     double move = 256 - length;
     double step = move / SIZE;
-
+    // first we whiten the image2
     for (int i = 0 ; i < SIZE ; i++) {
         for (int j = 0; j < SIZE; j++) {
             image2[i][j] = 255;
         }
     }
-
+    // then we compress the image into the needed space
     for(int i = 0 ; i < SIZE ; i++)
     {
         double ptr = 0;
@@ -644,15 +664,15 @@ void skew_horizontal()
             ptr += pixels;
         }
     }
-
-    for ( int i = 0 ; i < SIZE ; i++ ) 
+    // here we whiten image3
+    for ( int i = 0 ; i < SIZE ; i++ )
     {
-        for (int j = 0; j < SIZE; j++) 
+        for (int j = 0; j < SIZE; j++)
         {
             image3[i][j] = 255;
         }
     }
-
+    // here we skew the image
     for ( int i = 0 ; i < SIZE ; i++ )
     {
         for ( int j = 0 ; j < SIZE ; j++ )
@@ -661,6 +681,7 @@ void skew_horizontal()
         }
         move -= step ;
     }
+    // we copy the image3 into image to save it
     for(int i = 0 ; i < SIZE ;i++)
     {
         for(int  j = 0 ; j < SIZE ; j++)
@@ -671,7 +692,7 @@ void skew_horizontal()
 }
 void skew_vertical()
 {
-    // first we take the angle of the vertical skew and turning it to rad 
+    // first we take the angle of the vertical skew and turning it to rad
     // we concluded that the length is computed using the following formula
     double rad;
     cout<<"Please enter degree to skew up: ";
@@ -682,10 +703,10 @@ void skew_vertical()
     double pixels = 256 / length;
     double move = 256 - length;
     double step = move / SIZE;
-    // first we whiten the the image2 
-    for (int i = 0; i < SIZE; i++) 
+    // first we whiten the image2
+    for (int i = 0; i < SIZE; i++)
     {
-        for (int j = 0 ; j < SIZE ; j++) 
+        for (int j = 0 ; j < SIZE ; j++)
         {
             image2[i][j] = 255;
         }
@@ -700,11 +721,10 @@ void skew_vertical()
         }
         ptr+=pixels;
     }
-    // here we whiten image3 
-
-    for ( int i = 0 ; i < SIZE ; i++ ) 
+    // here we whiten image3
+    for ( int i = 0 ; i < SIZE ; i++ )
     {
-        for (int j = 0; j < SIZE; j++) 
+        for (int j = 0; j < SIZE; j++)
         {
             image3[i][j] = 255;
         }
@@ -732,7 +752,7 @@ int main()
     cout << "Greetings User in our little program\n";
     cout << "Our program is simply a program to edit photos using some already implemented filters \n";
     cout << "Let's dive into it!! \n ";
-    
+
     // here the program starts with greeting the user
     // after that the program starts to take input until the user exits
     read();
