@@ -492,12 +492,14 @@ void blur()
 
 void shuffle () 
 {
+    // the user enters the desired arrangement of quadrants of the new image
     cout << "New order of quarters ?\n";
     int quarter[4];
     for (int i = 0 ; i < 4 ; i++) 
     {
         cin >> quarter[i];
     }
+    // we take the number of the first quadrant that the user entered and put it in the first quadrant of the new image
     for (int i = 0 ; i < 127 ; i++) 
     {
         for (int j = 0 ; j < 127 ; j++) 
@@ -523,6 +525,7 @@ void shuffle ()
             }
         }
     }
+    // we take the number of the second quadrant that the user entered and put it in the second quadrant of the new image
     for (int i = 0 ; i < 127 ; i++) 
     {
         for (int j = 127 ; j < SIZE ; j++) 
@@ -548,6 +551,7 @@ void shuffle ()
             }
         }
     }
+    // we take the number of the third quadrant that the user entered and put it in the third quadrant of the new image
     for (int i = 127 ; i < SIZE ; i++) 
     {
         for (int j = 0 ; j < 127 ; j++) 
@@ -573,6 +577,7 @@ void shuffle ()
             }
         }
     }
+    // we take the number of the fourth quadrant that the user entered and put it in the fourth quadrant of the new image
     for (int i = 127 ; i < SIZE ; i++) 
     {
         for (int j = 127 ; j < SIZE ; j++) 
@@ -598,6 +603,7 @@ void shuffle ()
             }
         }
     }
+    // we copy the image2 into image to save it
     for ( int i = 0 ; i < SIZE ; i++ )
     {
         for ( int j = 0 ; j < SIZE ; j++ )
@@ -612,6 +618,7 @@ void shuffle ()
 
 void shrink ()
 {
+    // we take the dimension that the user wants to shrink the image
     cout << "Shrink to (1/2), (1/3) or (1/4)?\n";
     string dim;
     cin >> dim;
@@ -625,6 +632,7 @@ void shrink ()
             }
         }
     }
+    // here we shrink the image if the user entered (1/2)
     if (dim == "1/2") 
     {
         int ptr = 0;
@@ -642,6 +650,7 @@ void shrink ()
             ptr +=2;
         }
     }
+    // here we shrink the image if the user entered (1/3)
     if (dim == "1/3") 
     {
         int ptr = 0;
@@ -659,6 +668,7 @@ void shrink ()
             ptr +=3;
         }
     }
+    // here we shrink the image if the user entered (1/4)
     if (dim == "1/4") 
     {
         int ptr = 0;
@@ -676,6 +686,7 @@ void shrink ()
             ptr +=4;
         }
     }
+    // we copy the image2 into image to save it
     for ( int i = 0 ; i < SIZE ; i++ )
     {
         for ( int j = 0 ; j < SIZE ; j++ )
@@ -689,9 +700,11 @@ void shrink ()
 }
 void enlarge ()
 {
+    // we take the part that the user wants to enlarge
     cout << "Which quarter to enlarge 1, 2, 3 or 4?\n";
     int part ;
     cin >> part;
+    // here we enlarge the first part of the image if the user entered (1)
     if (part == 1) 
     {
         int ptr = 0;
@@ -712,6 +725,7 @@ void enlarge ()
             ptr += 2;
         }
     }
+    // here we enlarge the second part of the image if the user entered (2)
     if (part == 2) 
     {
         int ptr = 0;
@@ -732,6 +746,7 @@ void enlarge ()
             ptr += 2;
         }
     }
+    // here we enlarge the third part of the image if the user entered (3)
     else if (part == 3) 
     {
         int ptr = 0;
@@ -752,6 +767,7 @@ void enlarge ()
             ptr += 2;
         }
     }
+    // here we enlarge the fourth part of the image if the user entered (4)
     else if (part == 4) 
     {
         int ptr = 0;
@@ -772,6 +788,7 @@ void enlarge ()
             ptr += 2;
         }
     }
+    // we copy the image2 into image to save it
     for ( int i = 0 ; i < SIZE ; i++ )
     {
         for ( int j = 0 ; j < SIZE ; j++ )
@@ -786,6 +803,7 @@ void enlarge ()
 
 void crop()
 {
+    // we take from the user the point from which he wants the image to start
     int x , y;
     int length , width;
     cout << "Please enter x y l w: ";
@@ -801,8 +819,10 @@ void crop()
             }
         }
     }
+    // we calculate the length and width of the point entered by user
     int l = SIZE - x;
     int m = SIZE - y;
+    // here we crop the image
     for ( int i = x ; i < l ; i++ ) 
     {
         for (int j = y ; j < m ; j++) 
@@ -813,6 +833,7 @@ void crop()
             }
         }
     }
+    // we copy the image2 into image to save it
     for ( int i = 0 ; i < SIZE ; i++ )
     {
         for ( int j = 0 ; j < SIZE ; j++ )
@@ -828,6 +849,8 @@ void crop()
 
 void skew_horizontal()
 {
+    // first we take the angle of the horizontal skew and turning it to rad
+    // we concluded that the length is computed using the following formula
     double rad;
     cout<<"Please enter degree to skew right: ";
     cin>>rad;
@@ -838,7 +861,7 @@ void skew_horizontal()
     double pixels = 256 / length;
     double move = 256 - length;
     double step = move / SIZE;
-
+    // first we whiten the image2
     for (int i = 0 ; i < SIZE ; i++) 
     {
         for (int j = 0; j < SIZE; j++) 
@@ -849,7 +872,7 @@ void skew_horizontal()
             }
         }
     }
-
+    // then we compress the image into the needed space
     for(int i = 0 ; i < SIZE ; i++)
     {
         double ptr = 0;
@@ -862,7 +885,7 @@ void skew_horizontal()
             ptr += pixels;
         }
     }
-
+    // here we whiten image3
     for ( int i = 0 ; i < SIZE ; i++ ) 
     {
         for (int j = 0; j < SIZE; j++) 
@@ -873,7 +896,7 @@ void skew_horizontal()
             }
         }
     }
-
+    // here we skew the image
     for ( int i = 0 ; i < SIZE ; i++ )
     {
         for ( int j = 0 ; j < SIZE ; j++ )
@@ -885,6 +908,7 @@ void skew_horizontal()
         }
         move -= step ;
     }
+    // we copy the image3 into image to save it
     for(int i = 0 ; i < SIZE ;i++)
     {
         for(int  j = 0 ; j < SIZE ; j++)
